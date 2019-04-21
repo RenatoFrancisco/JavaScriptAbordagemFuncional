@@ -3,7 +3,7 @@ import { partialize } from '../utils/operators.js';
 
 const API = 'http://localhost:3000/notas';
 
-const getItemsFromNota = notas => notas.$flatMap(nota => nota.Itens);
+const getItemsFromNotas = notas => notas.$flatMap(nota => nota.itens);
 const filterItemsByCode = (code, items) => items.filter(item => item.codigo === code);
 const sumItemsValue = items => items.reduce((total, item) => total + item.valor, 0);
 
@@ -25,6 +25,12 @@ export const notasService = {
         const filterItems = partialize(filterItemsByCode, code);
 
         return this.listAll()
-            .then(sumItems(code));
+            .then(notas =>
+                sumItemsValue(
+                    filterItems(
+                        getItemsFromNotas(notas)
+                    )
+                )
+            );
     }
 };
