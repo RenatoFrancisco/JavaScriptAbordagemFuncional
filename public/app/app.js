@@ -10,6 +10,7 @@ const operations = pipe(
 
 const action =  operations(() =>
     retry(3, 3000, () => timeoutPromise(200, service.sumItems('2143')))
+    .then(total => EventEmitter.emit('itensTotalizados', total))
     .then(log)
     .catch(log)
 );
