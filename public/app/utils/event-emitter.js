@@ -13,5 +13,8 @@ export const EventEmitter = {
 
     emit(event, data) {
 
+        const listeners = events.get(event);
+        if (listeners)
+            listeners.forEach(listener => listener(data));
     }
 }

@@ -2,6 +2,7 @@ import { log, timeoutPromise, retry } from './utils/promise-helper.js';
 import './utils/array-helper.js';
 import { notasService as service } from './nota/service.js';
 import { takeUntil, debounceTime, partialize, pipe } from './utils/operators.js';
+import { EventEmitter } from './utils/event-emitter.js';
 
 const operations = pipe(
     partialize(takeUntil, 3),
