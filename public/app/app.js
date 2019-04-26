@@ -3,6 +3,16 @@ import './utils/array-helper.js';
 import { notasService as service } from './nota/service.js';
 import { takeUntil, debounceTime, partialize, pipe } from './utils/operators.js';
 import { EventEmitter } from './utils/event-emitter.js';
+import { Maybe } from './utils/maybe.js';
+
+const resultado = Maybe
+    .of(10)
+    .map(value => value + 10) 
+    .map(value => value + 30)
+    .getOrElse(0); // retorna 50
+
+alert(resultado);
+
 
 const operations = pipe(
     partialize(takeUntil, 3),
